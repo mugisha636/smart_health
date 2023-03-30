@@ -10,8 +10,6 @@ const schema = {
                 .required(),
       firstName: Joi.string()
       .empty()
-      .min(6)
-      .max(10)
       .pattern(/^[a-zA-Z]/)
       .messages({
         "any.required": "{{#label}} field is required",
@@ -23,8 +21,6 @@ const schema = {
 
       lastName: Joi.string()
       .empty()
-      .min(6)
-      .max(10)
       .pattern(/^[a-zA-Z]/)
       .messages({
         "any.required": "{{#label}} field is required",
