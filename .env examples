@@ -7,4 +7,4 @@ DEV_DB_HOST="127.0.0.1"
 SECRETKEY= ""
 EMAIL=
 PASSWORD=
-BASE_URL=http://localhost:{port}/api
+BASE_URL=http://localhost:5000/api

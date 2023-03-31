@@ -7,10 +7,7 @@
   require('dotenv').config();
   const jwt=require('jsonwebtoken')
 
-  console.log(process.env.EMAIL);
-
-
-  const { phoneExist, userExist,createUser } =require('../service/userServices');
+  const { phoneExist, userExist,createUser,verifyUserAccount,createUserSession,deleteSession } =require('../service/userServices');
   const bcrypt=require( 'bcrypt');
 
 
@@ -20,8 +17,8 @@
   const signUp=async(req,res)=>{
       const{firstName,lastName,email,telephone,password,role}=req.body
       try{ 
-          const exist = await userExist(email)
-      if(exist){
+          const user = await userExist(email)
+      if(user){
         return res.json({success: false, statusCode: 409, message: 'email already exists'})
       }
       const puser= await phoneExist(telephone)
@@ -31,12 +28,20 @@
       const newUser = await createUser(req.body)
 
       if(newUser){
-          const userToken = assignToken(newUser)
-      
+          const loginToken = assignToken(user)
+    const ssn = await createUserSession({
+      userId: email,
+      token:loginToken,
+      deviceType: req.headers["user-agent"],
+      loginIp: req.ip,
+      lastActivity: new Date().toJSON(),
+    });
     
+          return res.status(200).json({
+            loginToken,
+            ssn
+          });
           
-          
-          return res.status(201).json({success: true, statusCode: 201, regToken: userToken, data: newUser})
         }
     
         } catch (error) {
@@ -87,8 +92,28 @@
               return res.status(500).json({error:err.message})
           }
   }
- 
+  const verifyUser = async(req, res)=> {
+    let data = {};
+    try {
+      data = await verifyToken(req.params.token);
+      
+    } catch (err) {
+      return res.status(400).json({ message: `Invalid or expired Token.`});
+    }
+    try {
+      const verified = await verifyUserAccount(data.user.email);
+      if(verified){
+        // create user profile
+        // const profile = await createUserProfile(data.user)
+        
+        return res.status(200).json({status: 200, message: "User verified successfully"});
+      }
+      return res.status(409).json({status: 409, message: "User already verified"});
+    } catch (error) {
+      return res.status(500).json({message: `Ooops! Unable to verify User ${error.message}`});
+    }
+  }
   
 
 
-  module.exports={signUp,login,getUser}
+  module.exports={signUp,login,getUser,verifyUser}
