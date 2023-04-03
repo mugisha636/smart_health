@@ -9,7 +9,10 @@ module.exports = {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
       },
-      userId: DataTypes.STRING,
+      userId: {
+        type:DataTypes.STRING,
+      allowNull:false
+    },
       token: DataTypes.STRING(10000),
       loginIp: {
         type: DataTypes.STRING

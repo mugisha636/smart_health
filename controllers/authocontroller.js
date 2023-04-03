@@ -1,11 +1,8 @@
 
-  const {User,VericationToken}=require("../models")
+  const {User}=require("../models")
   const assignToken =require( '../helpers/assignToken');
   const verifyToken =require( '../helpers/verifyToken');
-  const nodemailer=require('nodemailer')
-  const{v4:uuidv4}=require('uuid')
   require('dotenv').config();
-  const jwt=require('jsonwebtoken')
 
   const { phoneExist, userExist,createUser,verifyUserAccount,createUserSession,deleteSession } =require('../service/userServices');
   const bcrypt=require( 'bcrypt');
@@ -30,7 +27,7 @@
       if(newUser){
           const loginToken = assignToken(user)
     const ssn = await createUserSession({
-      userId: email,
+      userId: newUser.id,
       token:loginToken,
       deviceType: req.headers["user-agent"],
       loginIp: req.ip,
@@ -94,18 +91,15 @@
   }
   const verifyUser = async(req, res)=> {
     let data = {};
+    
     try {
       data = await verifyToken(req.params.token);
-      
     } catch (err) {
-      return res.status(400).json({ message: `Invalid or expired Token.`});
+      return res.status(400).json(err.message);
     }
     try {
       const verified = await verifyUserAccount(data.user.email);
-      if(verified){
-        // create user profile
-        // const profile = await createUserProfile(data.user)
-        
+      if(verified){      
         return res.status(200).json({status: 200, message: "User verified successfully"});
       }
       return res.status(409).json({status: 409, message: "User already verified"});
