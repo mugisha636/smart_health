@@ -8,6 +8,7 @@ const schema = {
                 .regex(/^[0-9]{10}$/)
                 .messages({'string.pattern.base': `Phone number must have 10 digits.`})
                 .required(),
+                
       firstName: Joi.string()
       .empty()
       .pattern(/^[a-zA-Z]/)
@@ -29,6 +30,41 @@ const schema = {
         "string.pattern.base":
           "{{#label}} must contain only characters from a to z.",
       }),
+      specialized_in: Joi.string()
+      .empty()
+      .pattern(/^[a-zA-Z]/)
+      .messages({
+        "any.required": "{{#label}} field is required",
+        "string.base": "{{#label}} must be of type string",
+        "string.empty": "{{#label}} can not be empty",
+        "string.pattern.base":
+          "{{#label}} must contain only characters from a to z.",
+      }),
+      availability: Joi.string()
+      .empty()
+      .pattern(/^[a-zA-Z]/)
+      .messages({
+        "any.required": "{{#label}} field is required",
+        "string.base": "{{#label}} must be of type string",
+        "string.empty": "{{#label}} can not be empty",
+        "string.pattern.base":
+          "{{#label}} must contain only characters from a to z.",
+      }),
+      from: Joi.string()
+      .empty()
+      .messages({
+        "any.required": "{{#label}} field is required",
+        "string.base": "{{#label}} must be of type string",
+        "string.empty": "{{#label}} can not be empty",
+      }),
+      to: Joi.string()
+      .empty()
+      .messages({
+        "any.required": "{{#label}} field is required",
+        "string.base": "{{#label}} must be of type string",
+        "string.empty": "{{#label}} can not be empty",
+      }),
+      
     password: Joi.string()
       .required()
       .empty()

@@ -1,5 +1,6 @@
 import express from'express'
 const app=express()
+import contactRoute from './routes/contactRoute'
 import authRoute from'./routes/authRoutes'
 import swaggerUI from'swagger-ui-express'
 import swaggerDocs from'./documentation'
@@ -18,6 +19,8 @@ app.use(bodyParser.json())
 app.set('view engine', 'ejs')
 
 app.use('/api',authRoute)
+app.use('/api',contactRoute)
+
 
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
