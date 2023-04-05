@@ -64,7 +64,7 @@ const schema = {
         "string.base": "{{#label}} must be of type string",
         "string.empty": "{{#label}} can not be empty",
       }),
-      
+      profile_image:Joi.string(),
     password: Joi.string()
       .required()
       .empty()

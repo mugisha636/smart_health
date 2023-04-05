@@ -1,12 +1,15 @@
 
   const assignToken =require( '../helpers/assignToken');
-  const verifyToken =require( '../helpers/verifyToken');
   require('dotenv').config();
+  import {doctors} from '../models'
+  import multer from 'multer'
+  import path from 'path'
+
   const { phoneExist,doctorsExist, createDoctor,createDoctorSession } =require('../service/doctorService');
-  const bcrypt=require( 'bcrypt');
 
  const signUp=async(req,res)=>{
-      const{firstName,lastName,email,telephone,password,specialized_in,availability,from,to}=req.body
+      const{firstName,profile_image,lastName,email,telephone,password,specialized_in,availability,from,to}=req.body
+     
       try{ 
           const user = await doctorsExist(email)
       if(user){
@@ -40,5 +43,26 @@
         }
         
       }
-
-      module.exports={signUp}
+      const storage=multer.diskStorage({
+        destination:(req,file,cb)=>{
+           cb(null,'images')
+        },
+        filename:(req,file,cb)=>{
+            cb(null, Date.now()+path.extname(file.originalname))
+        }
+      })
+const upload=multer({
+    storage:storage,
+    limits:{fileSize:'1000000'},
+    fileFilter:(req,file,cb)=>{
+        const filetypes=/jpeg|jpeg|png|gif/
+        const mimeType=filetypes.test(file.mimetype)
+        const extName=filetypes.test(path.extname(file.originalname))
+        if (mimeType && extName) {
+            return cb(null,true)
+            
+        }
+        cb('give proper filesformat to upload')
+    }
+}).single('profile_image')
+      module.exports={signUp,upload}

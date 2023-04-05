@@ -9,7 +9,7 @@ const passwd=require('../controllers/forgotPassword')
 
 
 router.post('/signup',AuthValidation.verifySignup,usercont.signUp)
-router.post('/doc-signup',AuthValidation.verifySignup,doctorcont.signUp)
+router.post('/doc-signup',AuthValidation.verifySignup,doctorcont.upload, doctorcont.signUp)
 
 router.post('/login',usercont.login)
 router.get('/users',usercont.getUser)

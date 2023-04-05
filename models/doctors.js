@@ -49,6 +49,7 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.STRING,
       allowNull:false
     },
+    profile_image: DataTypes.STRING(10000),
     password:{
       type:DataTypes.STRING,
       allowNull:false

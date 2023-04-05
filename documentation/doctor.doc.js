@@ -30,6 +30,8 @@
  *                               type: string
  *                           to:
  *                               type: string
+ *                           profile_image:
+ *                               type: string
  
 
  *                           
