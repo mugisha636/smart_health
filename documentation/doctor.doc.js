@@ -42,7 +42,22 @@
  *              500:
  *                  description: Internal server error!
  * 
-  
+ * /expert:
+ *      get:
+ *          security:
+ *              - BearerToken: []
+ *          tags: [doctor]
+ *          summary: This helps to list all doctor.
+ *          description: List doctor
+ * 
+ *          responses:
+ *                  200:
+ *                      description: users retrieved successfully
+ *                  403:
+ *                      description: Not allowed
+ *                  500:
+ *                      description: Internal Server Error
+ *
 
  
  * 

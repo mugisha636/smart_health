@@ -1,5 +1,5 @@
 
-  const {User}=require("../models")
+  const {User,doctors}=require("../models")
   const assignToken =require( '../helpers/assignToken');
   const verifyToken =require( '../helpers/verifyToken');
   require('dotenv').config();
@@ -107,7 +107,18 @@
       return res.status(500).json({message: `Ooops! Unable to verify User ${error.message}`});
     }
   }
+  const getAllDoctors = async(req,res)=>{
+    try{
+        const doctor=await doctors.findAll()
+            return res.json(doctor)
+        }
+
+        catch(err){
+            console.log(err)
+            return res.status(500).json({error:err.message})
+        }
+}
   
 
 
-  module.exports={signUp,login,getUser,verifyUser}
+  module.exports={signUp,login,getUser,verifyUser,getAllDoctors}

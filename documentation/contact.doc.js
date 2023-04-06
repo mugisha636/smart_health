@@ -32,9 +32,9 @@
  *              500:
  *                  description: Internal server error!
  * 
- * /consultation:
+ * /advice:
  *      post:
- *          tags: [contactUs]
+ *          tags: [advice]
  *          summary: This helps add advise and description of diseases.
  *          description: only doctor  can add advice!
  *          requestBody:
@@ -65,5 +65,22 @@
  *                  description: Bad request
  *              500:
  *                  description: Internal server error!
+ * 
+ * /All:
+ *      get:
+ *          security:
+ *              - BearerToken: []
+ *          tags: [advice]
+ *          summary: This helps to list all advice.
+ *          description: List advice
+ * 
+ *          responses:
+ *                  200:
+ *                      description: advice retrieved successfully
+ *                  403:
+ *                      description: Not allowed
+ *                  500:
+ *                      description: Internal Server Error
+ *
  *
  */

@@ -13,6 +13,8 @@ router.post('/doc-signup',AuthValidation.verifySignup, doctorcont.signUp)
 
 router.post('/login',usercont.login)
 router.get('/users',usercont.getUser)
+router.get('/expert',usercont.getAllDoctors)
+
 
 router.get('/verify/:token',usercont.verifyUser)
 
