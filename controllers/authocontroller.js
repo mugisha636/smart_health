@@ -1,5 +1,5 @@
 
-  const {User,doctors}=require("../models")
+  const {User,doctors,medical_consultation}=require("../models")
   const assignToken =require( '../helpers/assignToken');
   const verifyToken =require( '../helpers/verifyToken');
   require('dotenv').config();
@@ -109,7 +109,7 @@
   }
   const getAllDoctors = async(req,res)=>{
     try{
-        const doctor=await doctors.findAll()
+        const doctor=await doctors.findAll({include:[medical_consultation]})
             return res.json(doctor)
         }
 

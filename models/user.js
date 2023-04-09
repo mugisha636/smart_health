@@ -28,7 +28,9 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.UUID
     },
-    firstName: DataTypes.STRING,
+    firstName: {
+      type:DataTypes.STRING
+    },
     lastName: DataTypes.STRING,
     email: DataTypes.STRING,
     telephone: DataTypes.STRING,
