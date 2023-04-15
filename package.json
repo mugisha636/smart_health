@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "babel server.js -d dist",
-    "dev": "nodemon --exec babel-node  server.js",
-    "start": "node server.js"
+    "build": "babel src -d dist",
+    "dev": "nodemon --exec babel-node  src/server.js",
+    "start": "node dist/server.js"
   },
   "keywords": [],
   "author": "",

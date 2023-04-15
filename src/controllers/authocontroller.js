@@ -2,6 +2,8 @@
   const {User,doctors,medical_consultation}=require("../models")
   const assignToken =require( '../helpers/assignToken');
   const verifyToken =require( '../helpers/verifyToken');
+  import sendVerificationEmail from '../helpers/sendEmail//sendVerificationEmail';
+
   require('dotenv').config();
 
   const { phoneExist, userExist,createUser,verifyUserAccount,createUserSession,deleteSession } =require('../service/userServices');
@@ -25,18 +27,12 @@
       const newUser = await createUser(req.body)
 
       if(newUser){
-          const loginToken = assignToken(user)
-    const ssn = await createUserSession({
-      userId: newUser.id,
-      token:loginToken,
-      deviceType: req.headers["user-agent"],
-      loginIp: req.ip,
-      lastActivity: new Date().toJSON(),
-    });
+          const userToken = assignToken(user)
+      sendVerificationEmail(userToken, newUser)
+
     
-          return res.status(200).json({
-            loginToken,
-            ssn
+    
+          return res.status(201).json({success:true,statusCode:201,regToken: userToken,data: newUser
           });
           
         }
@@ -100,9 +96,8 @@
     try {
       const verified = await verifyUserAccount(data.user.email);
       if(verified){      
-        return res.status(200).json({status: 200, message: "User verified successfully"});
+        return res.status(200).json({status: 200, message: "User verfied"});
       }
-      return res.status(409).json({status: 409, message: "User already verified"});
     } catch (error) {
       return res.status(500).json({message: `Ooops! Unable to verify User ${error.message}`});
     }

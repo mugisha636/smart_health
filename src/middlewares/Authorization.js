@@ -16,7 +16,7 @@ const isAuthenticated = async (req, res, next) => {
     const user = await User.findOne({ where: { id: decoded.user.id } });
     
     if (!user) return res.status(401).json({message: "Access denied. User not found"});
-
+   if(!user.isVerified) return res.status(401).json({message:'user not verified'})
     const session = await getUserSessions(token);
     if (!session.length == 1)
       return res.status(401).json({ message: "Access denied. Invalid session!"});

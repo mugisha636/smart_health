@@ -24,13 +24,17 @@ const askAi=async(req,res,next)=>{
             res.status(error.response.status).json({
                 success:false,
 
-                data:error.response.data
+                message:'ooh! paraphrase your question in order to give you right solution ',
+                // data:error.response.data
+
             })
         }
         else{
             res.status(404).json({
                 success:false,
-                data:error.message
+                message:'ooh! dear try it again',
+
+                // data:error.message
             })
         }
     }

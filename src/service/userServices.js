@@ -51,10 +51,10 @@ import bcrypt from 'bcrypt';
       if (!user) {
         throw new Error('User not found');
       }
-      if (user.verified) {
+      if (user.isVerified) {
         throw new Error('User already verified');
       }
-      user.verified = true;
+      user.isVerified = true;
       await user.save();
       return true;
     } catch (error) {

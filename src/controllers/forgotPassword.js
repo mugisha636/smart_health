@@ -20,7 +20,7 @@ const requestResetPassword = async( req, res)=>{
 
         const token = await assignToken(user)
         //proceding with email to reset password
-        const redirectLink = `${process.env.BASE_URL}` + `/api/v1/reset-password/` + token
+        const redirectLink = `${process.env.BASE_URL}` + `/api/reset-password` + token
         // console.log('reditrectLink', redirectLink)
         sendResetEmail(user, redirectLink);
 
