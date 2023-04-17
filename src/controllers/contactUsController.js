@@ -18,7 +18,7 @@ const consultation=async(req,res)=>{
     const{ category,health_issue,description,medical_advice,doctorId}=req.body
     try{
           const doctor=await doctors.findOne({where:{id:doctorId}})
-          if (!doctorId) {
+          if (!doctor) {
             res.status(500).json({message:'doctor not exist'})
           }
             const medical= await medical_consultation.create({

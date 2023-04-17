@@ -3,6 +3,7 @@ const app=express()
 import contactRoute from './routes/contactRoute'
 import authRoute from'./routes/authRoutes'
 import {ai} from './routes/AIRoutes'
+import{pointment} from './routes/appointmentRoute'
 import swaggerUI from'swagger-ui-express'
 import swaggerDocs from'./documentation'
 
@@ -22,6 +23,8 @@ app.set('view engine', 'ejs')
 app.use('/api',authRoute)
 app.use('/api',contactRoute)
 app.use('/api',ai)
+app.use('/api',pointment)
+
 
 
 
