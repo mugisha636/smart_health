@@ -59,6 +59,50 @@
  *                      description: Internal Server Error
  *
 
+ * /doctorAvailability:
+ *      post:
+ *          tags: [doctor]
+ *          summary: This helps to schedule availability.
+ *          description: availability registration!
+ *          requestBody:
+ *              description: availability
+ *              required: true
+ *              content:
+ *                application/json:
+ *                    schema:
+ *                       type: object
+ *                       properties:
+ *                           docId:
+ *                               type: string
+ *                           date:
+ *                               type: string
+ *                           time:
+ *                               type: string
+                            
+ *          responses:
+ *              201:
+ *                  description: Successfully shedured!
+ *              400:
+ *                  description: Bad request
+ *              500:
+ *                  description: Internal server error!
  
  * 
+
+* /AvailabilityList:
+ *      get:
+ *          security:
+ *              - BearerToken: []
+ *          tags: [doctor]
+ *          summary: This helps to list all availability.
+ *          description: availability
+ * 
+ *          responses:
+ *                  200:
+ *                      description:  retrieved successfully
+ *                  403:
+ *                      description: Not allowed
+ *                  500:
+ *                      description: Internal Server Error
+ *
   */

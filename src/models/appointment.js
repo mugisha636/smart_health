@@ -13,6 +13,9 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.belongsTo(models.User,{foreignKey:'userId'})
       this.belongsTo(models.doctors,{foreignKey:'doctorId'})
+      this.belongsTo(models.scheduleAppointment, {foreignKey: 'scheduleId'})
+
+    
 
 
     }
@@ -32,6 +35,10 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.STRING,
       allowNull:false
     },
+    time: {
+      type:DataTypes.STRING,
+      allowNull:false
+    },
     userId:{
       allowNull: false,
       defaultValue:DataTypes.UUIDV4,
@@ -42,6 +49,12 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue:DataTypes.UUIDV4,
       type: DataTypes.UUID
     },
+    scheduleId:{
+      allowNull: false,
+      defaultValue:DataTypes.UUIDV4,
+      type: DataTypes.UUID
+    },
+    
     status:{
         type: DataTypes.ENUM('pending', 'female', 'approved')
       },

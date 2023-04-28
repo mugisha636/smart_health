@@ -22,6 +22,12 @@
  *                               type: string
  *                           doctorId:
  *                               type: string 
+ *                           time:
+ *                               type: string
+ *        
+ *                           scheduleId:
+ *                               type: string
+ *                    
   
  *                           
  *          responses:

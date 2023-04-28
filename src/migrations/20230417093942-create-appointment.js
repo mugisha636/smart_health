@@ -19,6 +19,12 @@ module.exports = {
         defaultValue:DataTypes.UUIDV4,
         type: DataTypes.UUID
       },
+      scheduleId:{
+        allowNull: false,
+        defaultValue:DataTypes.UUIDV4,
+        type: DataTypes.UUID
+      },
+      
       description: {
         type: DataTypes.STRING
       },
@@ -26,6 +32,11 @@ module.exports = {
         type:DataTypes.STRING,
         allowNull:false
       },
+      time: {
+        type:DataTypes.STRING,
+        allowNull:false
+      },
+    
       status:{
         type: DataTypes.ENUM('pending', 'female', 'approved'),
         defaultValue:'pending'
