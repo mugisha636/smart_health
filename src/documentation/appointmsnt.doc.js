@@ -37,4 +37,22 @@
  *                  description: Bad request
  *              500:
  *                  description: Internal server error!
+ * 
+ * /AppointmentList:
+ *      get:
+ *          security:
+ *              - BearerToken: []
+ *          tags: [appointment]
+ *          summary: This helps to list all appointment.
+ *          description: availability
+ * 
+ *          responses:
+ *                  200:
+ *                      description:  retrieved successfully
+ *                  403:
+ *                      description: Not allowed
+ *                  500:
+ *                      description: Internal Server Error
+ *
+
  */ 

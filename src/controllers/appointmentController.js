@@ -93,6 +93,16 @@ const createAppointment = async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 };
+const allAppointment=async(req,res)=>{
+  try {
+    const availability=await appointment.findAll()
+    return res.status(200).json(availability)
+    
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error)
+  }
+ }
 
 
-module.exports={createAppointment,scheduleavailability,allAvailability}
+module.exports={createAppointment,scheduleavailability,allAvailability,allAppointment}
