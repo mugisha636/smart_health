@@ -6,12 +6,13 @@ import {ai} from './routes/AIRoutes'
 import{pointment} from './routes/appointmentRoute'
 import swaggerUI from'swagger-ui-express'
 import swaggerDocs from'./documentation'
+import cors from 'cors'
 
 var bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
+app.use(cors())
 
 var bodyParser = require('body-parser')
 require('dotenv/config');
