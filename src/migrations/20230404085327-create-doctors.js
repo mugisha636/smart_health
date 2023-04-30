@@ -30,14 +30,11 @@ module.exports = {
         type:DataTypes.STRING,
         allowNull:false
       },
-      from:{
+      image:{
         type:DataTypes.STRING,
         allowNull:false
       },
-      to:{
-        type:DataTypes.STRING,
-        allowNull:false
-      },
+      
       password:{
         type:DataTypes.STRING,
         allowNull:false

@@ -26,10 +26,9 @@
  *                               type: string 
  *                           specialized_in:
  *                               type: string 
- *                           from:
+ *                           image:
  *                               type: string
- *                           to:
- *                               type: string
+ 
  
  
 

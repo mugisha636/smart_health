@@ -52,20 +52,14 @@ const schema = {
         "string.pattern.base":
           "{{#label}} must contain only characters from a to z.",
       }),
-      from: Joi.string()
+      image: Joi.string()
       .empty()
       .messages({
         "any.required": "{{#label}} field is required",
         "string.base": "{{#label}} must be of type string",
         "string.empty": "{{#label}} can not be empty",
       }),
-      to: Joi.string()
-      .empty()
-      .messages({
-        "any.required": "{{#label}} field is required",
-        "string.base": "{{#label}} must be of type string",
-        "string.empty": "{{#label}} can not be empty",
-      }),
+      
     password: Joi.string()
       .required()
       .empty()

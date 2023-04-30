@@ -8,7 +8,7 @@
   const { phoneExist,doctorsExist, createDoctor,createDoctorSession } =require('../service/doctorService');
 
  const signUp=async(req,res)=>{
-      const{firstName,lastName,email,telephone,password,specialized_in,availability,from,to}=req.body
+      const{firstName,lastName,email,telephone,password,specialized_in,availability,image}=req.body
      
       try{ 
           const user = await doctorsExist(email)
