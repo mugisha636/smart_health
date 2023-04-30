@@ -8,7 +8,9 @@ const checkVerify = async (req, res, next) => {
         where: {email}
         
       })
+      if(!user) return res.status(401).json({message:'user not found'})
       if(!user.isVerified) return res.status(401).json({message:'user not verified'})
+
       return next()
 };
 
