@@ -29,6 +29,9 @@ module.exports = {
         type: DataTypes.STRING,
         defaultValue:'user'
       },
+      sex: {
+        type:DataTypes.STRING
+        },
       isVerified: {
         type:DataTypes.BOOLEAN
       },

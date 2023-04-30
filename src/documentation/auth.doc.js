@@ -24,7 +24,10 @@
  *                               type: string 
  *                           telephone:
  *                               type: string 
- *                           
+ *   
+ *                           sex:
+ *                               type: string 
+ *                        
  *          responses:
  *              201:
  *                  description: Successfully user craeted!

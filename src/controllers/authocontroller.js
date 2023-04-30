@@ -14,7 +14,7 @@
   // signup
 
   const signUp=async(req,res)=>{
-      const{firstName,lastName,email,telephone,password,role}=req.body
+      const{firstName,lastName,email,telephone,password,role,sex}=req.body
       try{ 
           const user = await userExist(email)
       if(user){

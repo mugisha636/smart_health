@@ -40,6 +40,9 @@ module.exports = (sequelize, DataTypes) => {
     role: {
       type:DataTypes.STRING,
       defaultValue:'user'},
+      sex: {
+        type:DataTypes.STRING
+        },
     isVerified: {
       type:DataTypes.BOOLEAN,
       defaultValue: false
