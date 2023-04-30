@@ -10,6 +10,8 @@ import checkVerify from '../middlewares/checkverify'
 
 router.post('/signup',AuthValidation.verifySignup,usercont.signUp)
 router.post('/doc-signup',AuthValidation.verifySignup, doctorcont.signUp)
+router.get('/Nusers',usercont.countUsers)
+
 
 router.post('/login', checkVerify, usercont.login)
 router.get('/users',usercont.getUser)

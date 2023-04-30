@@ -27,7 +27,10 @@
  *   
  *                           sex:
  *                               type: string 
- *                        
+ * 
+ *                           countryCode:
+ *                               type: string 
+ *                       
  *          responses:
  *              201:
  *                  description: Successfully user craeted!
@@ -98,7 +101,24 @@
  *                      description: Not allowed
  *                  500:
  *                      description: Internal Server Error
- *  
+ * 
+ * 
+ * /Nusers:
+ *      get:
+ *          security:
+ *              - BearerToken: []
+ *          tags: [Authentication]
+ *          summary: This helps to list all users.
+ *          description: List users
+ * 
+ *          responses:
+ *                  200:
+ *                      description: users retrieved successfully
+ *                  403:
+ *                      description: Not allowed
+ *                  500:
+ *                      description: Internal Server Error
+ * 
  * /forgot-password:
  *      post:
  *          tags: [Authentication]

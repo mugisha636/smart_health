@@ -113,7 +113,14 @@
             return res.status(500).json({error:err.message})
         }
 }
-  
+const countUsers = async (req, res) => {
+  try {
+    const count = await User.count();
+    return res.json({ count });
+  } catch (error) {
+    return res.json({ message: 'Unable to count users', error });
+  }
+};
 
 
-  module.exports={signUp,login,getUser,verifyUser,getAllDoctors}
+  module.exports={signUp,login,getUser,verifyUser,getAllDoctors,countUsers}

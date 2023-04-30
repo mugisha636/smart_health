@@ -43,6 +43,9 @@ module.exports = (sequelize, DataTypes) => {
       sex: {
         type:DataTypes.STRING
         },
+        countryCode: {
+          type:DataTypes.STRING
+          },
     isVerified: {
       type:DataTypes.BOOLEAN,
       defaultValue: false
