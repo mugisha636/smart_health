@@ -108,7 +108,7 @@
  *          security:
  *              - BearerToken: []
  *          tags: [Authentication]
- *          summary: This helps to list all users.
+ *          summary: This helps to list all users in digits.
  *          description: List users
  * 
  *          responses:
