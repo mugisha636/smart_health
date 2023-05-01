@@ -63,16 +63,36 @@
           });
         }
         const loginToken = assignToken(user)
-        
+        const ssn = await createUserSession({
+          userId: user.id,
+          token:loginToken,
+          deviceType: req.headers["user-agent"],
+          loginIp: req.ip,
+          lastActivity: new Date().toJSON(),
+        });
         
         return res.status(200).json({
           loginToken,
-      
+          ssn
         }); 
       } catch (error) {
         return res.status(500).json({ message: error.message });
       }
     };
+// logout
+    const  signout = async(req, res)=> {
+      try {
+        if (!req.user || !req.headers["authorization"]) {
+          return res.status(403).json({ message: 'user not logged in' });
+        }
+    
+        const token = req.headers["authorization"].split(" ")[1];
+        await deleteSession(null, req.user.id, token);
+        return res.status(200).json({ message: 'logged out successfully' });
+      } catch (error) {
+        return res.status(500).json({ message: 'unable to logout' });
+      }
+    }
 
     const getUser = async(req,res)=>{
       try{
@@ -123,4 +143,4 @@ const countUsers = async (req, res) => {
 };
 
 
-  module.exports={signUp,login,getUser,verifyUser,getAllDoctors,countUsers}
+  module.exports={signUp,login,getUser,verifyUser,getAllDoctors,countUsers,signout}

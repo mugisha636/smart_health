@@ -86,6 +86,19 @@
  *              500:
  *                  description: Internal server error!
  * 
+ * /signout:
+ *      post:
+ *          security:
+ *              - BearerToken: []
+ *          tags: [Authentication]
+ *          description: Logout the user
+ *          summary: It helps to logout the user
+ *          responses:
+ *                  200:
+ *                     description: user logged out succesfully
+ *                  500:
+ *                     description: Internal server error
+ *
  * /users:
  *      get:
  *          security:

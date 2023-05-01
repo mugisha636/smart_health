@@ -6,6 +6,8 @@ const doctorcont=require('../controllers/authoDoctorControllet')
 import AuthValidation from '../validationSchema/validation';
 const passwd=require('../controllers/forgotPassword')
 import checkVerify from '../middlewares/checkverify'
+import isAuthenticated from '../middlewares/Authorization'
+
 
 
 router.post('/signup',AuthValidation.verifySignup,usercont.signUp)
@@ -14,6 +16,8 @@ router.get('/Nusers',usercont.countUsers)
 
 
 router.post('/login', checkVerify, usercont.login)
+router.post("/signout", isAuthenticated,usercont.signout);
+
 router.get('/users',usercont.getUser)
 router.get('/expert',usercont.getAllDoctors)
 
