@@ -15,7 +15,8 @@ const contactUs=async(req,res)=>{
     
 }
 const consultation=async(req,res)=>{
-    const{ category,health_issue,description,medical_advice,doctorId}=req.body
+    const{ category,health_issue,description,medical_advice}=req.body
+    const doctorId = req.user.id
     try{
           const doctor=await doctors.findOne({where:{id:doctorId}})
           if (!doctor) {

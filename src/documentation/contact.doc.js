@@ -34,6 +34,8 @@
  * 
  * /advice:
  *      post:
+ *          security:
+ *              - BearerToken: []
  *          tags: [advice]
  *          summary: This helps add advise and description of diseases.
  *          description: only doctor  can add advice!
@@ -53,8 +55,7 @@
  *                               type: string
  *                           medical_advice:
  *                               type: string 
- *                           doctorId:
- *                               type: string 
+ 
  
   
  *                           
