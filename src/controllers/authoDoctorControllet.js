@@ -10,7 +10,7 @@
   const bcrypt=require( 'bcrypt');
   
 
-  const { phoneExist,doctorsExist, createDoctor,createDoctorSession,verifyDoctorAccount } =require('../service/doctorService');
+  const { phoneExist,doctorsExist, createDoctor,createDoctorSession,verifyDoctorAccount,deleteSession } =require('../service/doctorService');
 
  const signUp=async(req,res)=>{
       const{firstName,lastName,email,telephone,password,specialized_in,availability,image}=req.body
@@ -98,6 +98,21 @@
         }
       };
 
+      // logout
+    const  doctorSignout = async(req, res)=> {
+      try {
+        if (!req.user || !req.headers["authorization"]) {
+          return res.status(403).json({ message: 'user not logged in' });
+        }
+    
+        const token = req.headers["authorization"].split(" ")[1];
+        await deleteSession(null, req.user.id, token);
+        return res.status(200).json({ message: 'logged out successfully' });
+      } catch (error) {
+        return res.status(500).json({ message: 'unable to logout' });
+      }
+    }
+
 
  const allDoctor=async(req,res)=>{
   try {
@@ -109,4 +124,4 @@
     return res.status(500).json(error)
   }
  }     
-      module.exports={signUp,loginDoc,allDoctor,verifyDoctor}
+      module.exports={signUp,loginDoc,allDoctor,verifyDoctor,doctorSignout}

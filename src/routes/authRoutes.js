@@ -7,17 +7,20 @@ import AuthValidation from '../validationSchema/validation';
 const passwd=require('../controllers/forgotPassword')
 import checkVerify from '../middlewares/checkverify'
 import isAuthenticated from '../middlewares/Authorization'
+import doctorAuthenticated from '../middlewares/doctorAuthorization'
+
 
 
 
 router.post('/signup',AuthValidation.verifySignup,usercont.signUp)
 router.post('/doc-signup',AuthValidation.verifySignup, doctorcont.signUp)
-router.post('/doctorLogin',doctorcont.loginDoc)
+router.post('/doctorLogin',checkVerify,doctorcont.loginDoc)
 router.get('/Nusers',usercont.countUsers)
 
 
 router.post('/login', checkVerify, usercont.login)
 router.post("/signout", isAuthenticated,usercont.signout);
+router.post('/doctorRogout',doctorAuthenticated,doctorcont.doctorSignout)
 
 router.get('/users',usercont.getUser)
 router.get('/expert',usercont.getAllDoctors)

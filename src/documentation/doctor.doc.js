@@ -90,6 +90,39 @@
  *                  description: Internal server error!
  * 
  * 
+ * 
+  * /doctorRogout:
+ *      post:
+ *          security:
+ *              - BearerToken: []
+ *          tags: [doctor]
+ *          description: Logout the user
+ *          summary: It helps to logout the user
+ *          responses:
+ *                  200:
+ *                     description: user logged out succesfully
+ *                  500:
+ *                     description: Internal server error
+ *
+ * /users:
+ *      get:
+ *          security:
+ *              - BearerToken: []
+ *          tags: [Authentication]
+ *          summary: This helps to list all users.
+ *          description: List users
+ * 
+ *          responses:
+ *                  200:
+ *                      description: users retrieved successfully
+ *                  403:
+ *                      description: Not allowed
+ *                  500:
+ *                      description: Internal Server Error
+ * 
+
+
+
 
  *
 
