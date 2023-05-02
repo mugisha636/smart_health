@@ -3,7 +3,8 @@ import {appointment,User,doctors,scheduleAppointment} from'../models'
 // doctor schedule appointment
 
 const scheduleavailability = async (req, res) => {
-  const { docId, date, time } = req.body;
+  const { date, time } = req.body;
+  const docId = req.user.id
   // Check if docId, date, and time exist
   if (!docId || !date || !time) {
     return res.status(400).json({ message: 'docId, date, and time are required' });
@@ -21,7 +22,6 @@ const scheduleavailability = async (req, res) => {
       return res.status(409).json({ message: 'Appointment already exists' });
     }
     const availability = await scheduleAppointment.create({
-      docId,
       date,
       time,
     });
@@ -46,10 +46,10 @@ const allAvailability=async(req,res)=>{
 
 
 
-
 // request apointment
 const createAppointment = async (req, res) => {
-  const { userId, description, date, time, doctorId,scheduleId } = req.body;
+  const {description, date, time,scheduleId } = req.body;
+  const userId = req.user.id
 
   try {
     // Check if user with given ID exists
@@ -63,27 +63,13 @@ const createAppointment = async (req, res) => {
       return res.status(400).json({message:'appointment not exist'})
     }
 
-    // Check if doctor with given ID exists
-    const doctor = await doctors.findOne({ where: { id: doctorId } });
-    if (!doctor) {
-      return res.status(400).json({ message: 'Doctor not found' });
-    }
-
     // Check if description and userId are provided
     if (!description || !userId) {
       return res.status(400).json({ message: 'Please provide description and user ID' });
     }
 
     // Create new appointment
-    const appointments = await appointment.create({
-      userId,
-      description,
-      date,
-      doctorId,
-      time,
-      scheduleId
-      
-    });
+    const appointments = await appointment.create({description, date, time,scheduleId});
 
     // Send response with newly created appointment
     return res.json(appointments);

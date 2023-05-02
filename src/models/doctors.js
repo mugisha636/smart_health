@@ -11,7 +11,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate({medical_consultation,appointment,scheduleAppointment}) {
       // define association here
-      this.hasMany(appointment,{foreignKey:'doctorId'})
       this.hasMany(scheduleAppointment,{foreignKey:'docId'})
 
       
@@ -54,7 +53,12 @@ module.exports = (sequelize, DataTypes) => {
     password:{
       type:DataTypes.STRING,
       allowNull:false
+    },
+    isVerified: {
+      type:DataTypes.BOOLEAN,
+      defaultValue: false
     }
+
    
   }, {
     sequelize,

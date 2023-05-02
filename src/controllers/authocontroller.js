@@ -2,7 +2,7 @@
   const {User,doctors,medical_consultation}=require("../models")
   const assignToken =require( '../helpers/assignToken');
   const verifyToken =require( '../helpers/verifyToken');
-  import sendVerificationEmail from '../helpers/sendEmail//sendVerificationEmail';
+  import sendVerificationEmail from '../helpers/sendEmail/sendVerificationEmail';
 
   require('dotenv').config();
 

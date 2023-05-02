@@ -41,6 +41,59 @@
  *              500:
  *                  description: Internal server error!
  * 
+ * 
+  * /verifydoctor/{token}:
+ *      get:
+ *          tags: [doctor]
+ *          description: It helps to verify user
+ *          parameters:
+ *              - name: token
+ *                in: path
+ *                description: Registration token
+ *                required: true
+ * 
+ *          responses:
+ *                  200:
+ *                     description: user verified succesfully
+ *                  400:
+ *                     description: bad request
+ *                  409:
+ *                     description: user already verified
+ *                  500:
+ *                     description: Internal server error
+ * 
+  * /doctorLogin:
+ *      post:
+ *          tags: [doctor]
+ *          summary: This helps to login as a user.
+ *          description: Teacher, Parent, Patron, Matron, DoS, DoD, and Head Teacher registration!
+ *          requestBody:
+ *              description: login
+ *              required: true
+ *              content:
+ *                application/json:
+ *                    schema:
+ *                       type: object
+ *                       properties:
+ *                           email:
+ *                               type: string
+ *                           password:
+ *                               type: string 
+ *          responses:
+ *              200:
+ *                  description: Successfully user logged in!
+ *              400:
+ *                  description: Bad request
+ *              404: 
+ *                  description: Not Found
+ *              500:
+ *                  description: Internal server error!
+ * 
+ * 
+
+ *
+
+ * 
  * /expert:
  *      get:
  *          security:
@@ -60,6 +113,9 @@
 
  * /doctorAvailability:
  *      post:
+ *          security:
+ *              - BearerToken: []
+
  *          tags: [doctor]
  *          summary: This helps to schedule availability.
  *          description: availability registration!
@@ -71,8 +127,7 @@
  *                    schema:
  *                       type: object
  *                       properties:
- *                           docId:
- *                               type: string
+ 
  *                           date:
  *                               type: string
  *                           time:
@@ -104,4 +159,6 @@
  *                  500:
  *                      description: Internal Server Error
  *
+ * 
+
   */

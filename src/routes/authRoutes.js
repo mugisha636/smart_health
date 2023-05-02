@@ -12,6 +12,7 @@ import isAuthenticated from '../middlewares/Authorization'
 
 router.post('/signup',AuthValidation.verifySignup,usercont.signUp)
 router.post('/doc-signup',AuthValidation.verifySignup, doctorcont.signUp)
+router.post('/doctorLogin',doctorcont.loginDoc)
 router.get('/Nusers',usercont.countUsers)
 
 
@@ -23,6 +24,7 @@ router.get('/expert',usercont.getAllDoctors)
 
 
 router.get('/verify/:token',usercont.verifyUser)
+router.get('/verifydoctor/:token',doctorcont.verifyDoctor)
 
 router.post('/forgot-password',passwd.requestResetPassword)
 router.post('/reset-password/:token', passwd.resetPassword)

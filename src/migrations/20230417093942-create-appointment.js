@@ -14,11 +14,6 @@ module.exports = {
         defaultValue:DataTypes.UUIDV4,
         type: DataTypes.UUID
       },
-      doctorId:{
-        allowNull: false,
-        defaultValue:DataTypes.UUIDV4,
-        type: DataTypes.UUID
-      },
       scheduleId:{
         allowNull: false,
         defaultValue:DataTypes.UUIDV4,

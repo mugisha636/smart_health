@@ -39,6 +39,10 @@ module.exports = {
         type:DataTypes.STRING,
         allowNull:false
       },
+    isVerified: {
+      type:DataTypes.BOOLEAN,
+      defaultValue: false
+    },
       createdAt: {
         allowNull: false,
         type: DataTypes.STRING

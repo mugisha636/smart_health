@@ -1,11 +1,16 @@
 
   const assignToken =require( '../helpers/assignToken');
+  const verifyToken =require( '../helpers/verifyToken');
+
   require('dotenv').config();
   import {doctors} from '../models'
   import multer from 'multer'
   import path from 'path'
+  import sendVerificationEmail from '../helpers/sendEmail/doctorVerificationEmail';
+  const bcrypt=require( 'bcrypt');
+  
 
-  const { phoneExist,doctorsExist, createDoctor,createDoctorSession } =require('../service/doctorService');
+  const { phoneExist,doctorsExist, createDoctor,createDoctorSession,verifyDoctorAccount } =require('../service/doctorService');
 
  const signUp=async(req,res)=>{
       const{firstName,lastName,email,telephone,password,specialized_in,availability,image}=req.body
@@ -19,21 +24,16 @@
       if(puser){
         return res.json({success: false, statusCode: 409, message: 'phone already exist'})
       }
-      const newUser = await createDoctor(req.body)
+      const newDoctor = await createDoctor(req.body)
 
-      if(newUser){
+      if(newDoctor){
           const loginToken = assignToken(user)
-    const ssn = await createDoctorSession({
-      userId: newUser.id,
-      token:loginToken,
-      deviceType: req.headers["user-agent"],
-      loginIp: req.ip,
-      lastActivity: new Date().toJSON(),
-    });
+      sendVerificationEmail(loginToken, newDoctor)
+          
     
           return res.status(200).json({
             loginToken,
-            ssn
+            newDoctor
           });
           
         }
@@ -43,6 +43,61 @@
         }
         
       }
+      // verify user
+      const verifyDoctor = async(req, res)=> {
+        let data = {};
+        
+        try {
+          data = await verifyToken(req.params.token);
+        } catch (err) {
+          return res.status(400).json(err.message);
+        }
+        try {
+          const verified = await verifyDoctorAccount(data.user.email);
+          if(verified){      
+            return res.status(200).json({status: 200, message: "User verfied"});
+          }
+        } catch (error) {
+          return res.status(500).json({message: `Ooops! Unable to verify User ${error.message}`});
+        }
+      }
+
+      // login
+      const loginDoc = async (req, res) => {
+        const {email} = req.body
+        try {
+          const user = await doctorsExist(email)
+          if (!user) {
+            return res.status(404).json({ message: "User Not found." });
+          }
+          
+          const passwordIsValid = bcrypt.compareSync(
+            req.body.password,
+            user.password
+          );
+          if (!passwordIsValid) {
+            return res.status(401).send({
+              message: "Invalid Password!",
+            });
+          }
+          const loginToken = assignToken(user)
+          const ssn = await createDoctorSession({
+            userId: user.id,
+            token:loginToken,
+            deviceType: req.headers["user-agent"],
+            loginIp: req.ip,
+            lastActivity: new Date().toJSON(),
+          });
+          
+          return res.status(200).json({
+            loginToken,
+            ssn
+          }); 
+        } catch (error) {
+          return res.status(500).json({ message: error.message });
+        }
+      };
+
 
  const allDoctor=async(req,res)=>{
   try {
@@ -54,4 +109,4 @@
     return res.status(500).json(error)
   }
  }     
-      module.exports={signUp,allDoctor}
+      module.exports={signUp,loginDoc,allDoctor,verifyDoctor}

@@ -12,7 +12,6 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.belongsTo(models.User,{foreignKey:'userId'})
-      this.belongsTo(models.doctors,{foreignKey:'doctorId'})
       this.belongsTo(models.scheduleAppointment, {foreignKey: 'scheduleId'})
 
     
@@ -40,11 +39,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull:false
     },
     userId:{
-      allowNull: false,
-      defaultValue:DataTypes.UUIDV4,
-      type: DataTypes.UUID
-    },
-    doctorId:{
       allowNull: false,
       defaultValue:DataTypes.UUIDV4,
       type: DataTypes.UUID

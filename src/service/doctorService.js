@@ -45,16 +45,16 @@ import bcrypt from 'bcrypt';
     return userSession;
   }
 
-  const verifyUserAccount = async (email) => {
+  const verifyDoctorAccount = async (email) => {
     try {
       const user = await doctors.findOne({ email });
       if (!user) {
         throw new Error('User not found');
       }
-      if (user.verified) {
+      if (user.isVerified) {
         throw new Error('User already verified');
       }
-      user.verified = true;
+      user.isVerified = true;
       await user.save();
       return true;
     } catch (error) {
@@ -72,4 +72,4 @@ import bcrypt from 'bcrypt';
  
 
   
-export{doctorsExist, createDoctor, phoneExist,verifyUserAccount,createDoctorSession,deleteSession,getUserSessions}
+export{doctorsExist, createDoctor, phoneExist,verifyDoctorAccount,createDoctorSession,deleteSession,getUserSessions}

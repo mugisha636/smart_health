@@ -3,6 +3,8 @@
  * 
  * /appointment:
  *      post:
+ *          security:
+ *              - BearerToken: []
  *          tags: [appointment]
  *          summary: This helps  to request appointment.
  *          description: every user can send appointment!
@@ -14,14 +16,10 @@
  *                    schema:
  *                       type: object
  *                       properties:
- *                           userId:
- *                               type: string
  *                           description:
  *                               type: string
  *                           date:
  *                               type: string
- *                           doctorId:
- *                               type: string 
  *                           time:
  *                               type: string
  *        
