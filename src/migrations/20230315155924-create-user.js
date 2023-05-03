@@ -32,9 +32,6 @@ module.exports = {
       sex: {
         type:DataTypes.STRING
         },
-        countryCode: {
-          type:DataTypes.STRING
-          },
       isVerified: {
         type:DataTypes.BOOLEAN
       },

@@ -27,9 +27,7 @@
  *   
  *                           sex:
  *                               type: string 
- * 
- *                           countryCode:
- *                               type: string 
+  
  *                       
  *          responses:
  *              201:

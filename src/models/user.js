@@ -43,9 +43,6 @@ module.exports = (sequelize, DataTypes) => {
         type:DataTypes.STRING,
         allowNull:false
         },
-        countryCode: {
-          type:DataTypes.STRING
-          },
     isVerified: {
       type:DataTypes.BOOLEAN,
       defaultValue: false
