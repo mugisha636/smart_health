@@ -18,6 +18,8 @@ module.exports = (sequelize, DataTypes) => {
       });
     
     this.hasMany(models.appointment,{foreignKey:'userId'})
+    this.hasMany(models.purchase,{foreignKey:'userId'})
+
 
 
     }
