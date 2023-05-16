@@ -27,8 +27,9 @@ const askAi = async (req, res, next) => {
     } else if (error.response) {
       res.status(error.response.status).json({
         success: false,
-        message: 'Oops! Please paraphrase your question to provide the right solution.',
+        // message: 'Oops! Please paraphrase your question to provide the right solution.',
         data: error.response.data,
+        
       });
     } else {
       res.status(500).json({
