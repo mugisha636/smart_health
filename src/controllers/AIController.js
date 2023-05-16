@@ -24,7 +24,6 @@ const askAi = async (req, res, next) => {
         success: false,
         message: 'Oops! You have insufficient quota to process this request. Please check your plan and billing details.',
 
-        // message: 'Oops! You have insufficient quota to process this request. Please check your plan and billing details.',
       });
     } else if (error.response) {
       res.status(error.response.status).json({
