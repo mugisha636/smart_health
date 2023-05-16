@@ -8,7 +8,7 @@
     "db": "npx sequelize db:migrate ",
     "unmigrate": "npx sequelize-cli db:migrate:undo:all",
     "dev": "nodemon --exec babel-node  src/server.js",
-    "start": "npm run build &&npm run unmigrate && npm run db && node dist/server.js"
+    "start": "npm run build && npm run db && node dist/server.js"
   },
   "keywords": [],
   "author": "",
