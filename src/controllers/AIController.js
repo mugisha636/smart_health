@@ -18,12 +18,12 @@ const askAi = async (req, res, next) => {
       success: true,
       data: completion.choices[0].text,
     });
-  } catch (error) {
+  } catch (error) { 
     if (error.response && error.response.data && error.response.data.error && error.response.data.error.code === 'insufficient_quota') {
       res.status(402).json({
         success: false,
         message: 'Oops! You have insufficient quota to process this request. Please check your plan and billing details.',
-
+ 
       });
     } else if (error.response) {
       res.status(error.response.status).json({
