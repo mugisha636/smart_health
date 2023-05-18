@@ -53,4 +53,17 @@ const getAllAdvice = async(req,res)=>{
         }
 }
 
-module.exports={contactUs,consultation,getAllAdvice}
+const getAllContact = async(req,res)=>{
+    try{
+        
+        const doctor=await contact.findAll({include:[doctors]})
+            return res.json(doctor)
+        }
+
+        catch(err){
+            console.log(err)
+            return res.status(500).json({error:err.message})
+        }
+}
+
+module.exports={contactUs,consultation,getAllAdvice,getAllContact}
